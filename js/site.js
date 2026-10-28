@@ -64,6 +64,17 @@
     document.querySelectorAll(".area[id]").forEach(function (s) { io.observe(s); });
   }
 
+  /* ---------- appeal page: open all grounds; open a ground from a #link ---------- */
+  var openAll = document.querySelector("[data-open-all]");
+  var grounds = document.querySelectorAll("details.ground");
+  if (openAll) openAll.addEventListener("click", function () {
+    var anyClosed = Array.prototype.some.call(grounds, function (d) { return !d.open; });
+    grounds.forEach(function (d) { d.open = anyClosed; });
+    openAll.textContent = anyClosed ? "Close all" : "Open all twelve";
+  });
+  if (location.hash) { var g = document.querySelector("details.ground" + location.hash); if (g) g.open = true; }
+  grounds.forEach(function (d) { d.addEventListener("toggle", function () { if (window.ScrollTrigger) ScrollTrigger.refresh(); }); });
+
   /* ---------- no motion: tidy up and stop ---------- */
   var wipe = document.querySelector(".wipe");
   if (reduce || !window.gsap) {
