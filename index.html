@@ -3,111 +3,602 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Record: the court-martial of Cadet Sanopao</title>
-<meta name="description" content="The court-martial of Cadet Axl Rey L. Sanopao, assembled entirely from the record: the court's own admissions, the transcripts and the civilian dismissal.">
-<meta property="og:title" content="The Record: the court-martial of Cadet Sanopao">
-<meta property="og:description" content="The court-martial of Cadet Axl Rey L. Sanopao, assembled entirely from the record: the court's own admissions, the transcripts and the civilian dismissal.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://axlreys.github.io/the-record/">
-<meta property="og:image" content="https://axlreys.github.io/the-record/images/06-tribunal.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#14100f">
-<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/site.css">
-<script>(function(d){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var s=sessionStorage;if(!s.getItem('pt-intro')){d.documentElement.classList.add('intro');s.removeItem('pt-wipe');}else if(s.getItem('pt-wipe')){d.documentElement.classList.add('arriving');}}catch(e){}})(document);</script>
+<title>The Record: Case of Cadet Axl Rey L. Sanopao</title>
+<style>
+  /* ---------- TOKENS (light) ---------- */
+  :root{
+    --paper:#F1F3F5;
+    --surface:#FFFFFF;
+    --surface-2:#EAEDF0;
+    --ink:#171C22;
+    --ink-soft:#4C5661;
+    --ink-faint:#788591;
+    --rule:#D6DBE0;
+    --accent:#8A2B2B;      /* oxblood, critical findings */
+    --accent-soft:#F0E2E2;
+    --evidence:#2E5266;    /* steel blue for sources and structure */
+    --evidence-soft:#E1E9EE;
+    --shadow:0 1px 2px rgba(20,28,38,.06),0 8px 28px rgba(20,28,38,.06);
+
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --font-body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,"Liberation Mono",monospace;
+
+    --measure:66ch;
+    --pad:clamp(1.1rem,4vw,2.4rem);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0F1319;--surface:#161C24;--surface-2:#1D2530;--ink:#E7ECF1;--ink-soft:#A6B2BE;
+      --ink-faint:#74818E;--rule:#2A333E;--accent:#D07C7C;--accent-soft:#2A1C1C;--evidence:#83AAC2;
+      --evidence-soft:#17242C;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#F1F3F5;--surface:#FFFFFF;--surface-2:#EAEDF0;--ink:#171C22;--ink-soft:#4C5661;
+    --ink-faint:#788591;--rule:#D6DBE0;--accent:#8A2B2B;--accent-soft:#F0E2E2;--evidence:#2E5266;
+    --evidence-soft:#E1E9EE;--shadow:0 1px 2px rgba(20,28,38,.06),0 8px 28px rgba(20,28,38,.06);
+  }
+  :root[data-theme="dark"]{
+    --paper:#0F1319;--surface:#161C24;--surface-2:#1D2530;--ink:#E7ECF1;--ink-soft:#A6B2BE;
+    --ink-faint:#74818E;--rule:#2A333E;--accent:#D07C7C;--accent-soft:#2A1C1C;--evidence:#83AAC2;
+    --evidence-soft:#17242C;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--font-body);font-size:1.02rem;line-height:1.68;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:52rem;margin-inline:auto;padding-inline:var(--pad)}
+  .measure{max-width:var(--measure)}
+
+  a{color:var(--evidence);text-underline-offset:2px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--evidence);outline-offset:3px;border-radius:3px}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.16;text-wrap:balance;margin:0}
+  p{margin:0 0 1.05em}
+  p:last-child{margin-bottom:0}
+
+  .eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--evidence);margin:0 0 1rem}
+  .label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---------- top bar ---------- */
+  .topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--rule)}
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.65rem}
+  .mark{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
+  .mark b{color:var(--ink)}
+  .toggle{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);background:var(--surface);border:1px solid var(--rule);padding:.4rem .6rem;border-radius:6px}
+  .toggle:hover{color:var(--ink);border-color:var(--evidence)}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-block:clamp(2.6rem,7vw,4.6rem) clamp(1.8rem,5vw,3rem)}
+  .caption-strip{font-family:var(--font-mono);font-size:.74rem;line-height:1.7;letter-spacing:.03em;color:var(--ink-soft);border-left:2px solid var(--accent);padding-left:.9rem;margin-bottom:1.9rem}
+  .masthead h1{font-size:clamp(2.15rem,6.4vw,3.6rem);letter-spacing:-.01em;margin-bottom:.55rem}
+  .masthead h1 .q{color:var(--accent)}
+  .lede{font-size:clamp(1.08rem,2.4vw,1.28rem);color:var(--ink-soft);max-width:40ch}
+  .thesis{margin-top:1.7rem;font-size:1.06rem}
+
+  /* ---------- key facts ---------- */
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.2rem,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-top:2.4rem;box-shadow:var(--shadow)}
+  .fact{background:var(--surface);padding:1.05rem 1.1rem}
+  .fact .k{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.5rem}
+  .fact .v{font-family:var(--font-display);font-size:1.42rem;line-height:1.12;font-variant-numeric:tabular-nums}
+  .fact.crit .v{color:var(--accent)}
+
+  /* ---------- sections ---------- */
+  section{padding-block:clamp(2.4rem,6vw,4rem);border-top:1px solid var(--rule)}
+  .sec-head{display:flex;gap:1rem;align-items:baseline;margin-bottom:1.6rem}
+  .sec-no{font-family:var(--font-mono);font-size:.8rem;color:var(--evidence);flex:none;padding-top:.35rem}
+  .sec-head h2{font-size:clamp(1.5rem,3.6vw,2.05rem)}
+  .sec-intro{color:var(--ink-soft);margin-bottom:1.9rem}
+
+  /* ---------- timeline ---------- */
+  .tl{list-style:none;margin:0;padding:0;position:relative}
+  .tl::before{content:"";position:absolute;left:6.6rem;top:.4rem;bottom:.4rem;width:1px;background:var(--rule)}
+  .tl li{position:relative;display:grid;grid-template-columns:6.6rem 1fr;gap:1.4rem;padding-bottom:1.7rem}
+  .tl li:last-child{padding-bottom:0}
+  .tl time{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-soft);text-align:right;padding-top:.1rem;letter-spacing:.02em}
+  .tl .node{position:relative;padding-left:1.4rem}
+  .tl .node::before{content:"";position:absolute;left:-.42rem;top:.44rem;width:.62rem;height:.62rem;border-radius:50%;background:var(--surface);border:2px solid var(--evidence)}
+  .tl li.key .node::before{background:var(--accent);border-color:var(--accent)}
+  .tl h3{font-family:var(--font-body);font-weight:650;font-size:1rem;margin-bottom:.2rem}
+  .tl p{font-size:.96rem;color:var(--ink-soft);margin:0}
+
+  /* ---------- transcript / evidence block ---------- */
+  .exhibit{background:var(--surface);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:1.4rem 0;box-shadow:var(--shadow)}
+  .exhibit .ex-head{display:flex;flex-wrap:wrap;gap:.5rem 1rem;justify-content:space-between;align-items:center;background:var(--surface-2);border-bottom:1px solid var(--rule);padding:.6rem .95rem}
+  .ex-who{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+  .ex-tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.03em;color:var(--evidence)}
+  .ex-body{padding:1rem 1.05rem;font-family:var(--font-mono);font-size:.88rem;line-height:1.62}
+  .qa{display:grid;grid-template-columns:1.6rem 1fr;gap:.2rem .6rem;margin:0}
+  .qa+.qa{margin-top:.55rem}
+  .qa .sp{color:var(--evidence);font-weight:700}
+  .qa.ans .sp{color:var(--accent)}
+  .qa .tx{margin:0}
+
+  /* pull finding (the court's own words) */
+  .finding{border-left:3px solid var(--accent);background:var(--accent-soft);padding:1.05rem 1.2rem;border-radius:0 8px 8px 0;margin:1.3rem 0}
+  .finding blockquote{margin:0;font-family:var(--font-display);font-size:1.16rem;line-height:1.4}
+  .finding .src{display:block;margin-top:.7rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.03em;color:var(--ink-soft)}
+
+  .src-line{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.02em;color:var(--ink-faint);margin-top:-.4em}
+
+  /* named-speaker dialogue inside an exhibit */
+  .ex-body .dline{margin:0 0 .6rem}
+  .ex-body .dline:last-child{margin:0}
+  .who{font-weight:700}
+  .who.ev{color:var(--evidence)}
+  .who.ax{color:var(--accent)}
+
+  /* clickable source citations -> records archive */
+  .srclink{cursor:pointer}
+  .srclink:hover,.srclink:focus-visible{text-decoration:underline;color:var(--evidence)}
+  .archive-link{margin-top:1.7rem}
+  .archive-link a{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.02em;color:var(--evidence);text-decoration:none;border:1px solid var(--rule);background:var(--surface);padding:.55rem .85rem;border-radius:8px;display:inline-block}
+  .archive-link a:hover{border-color:var(--evidence)}
+  footer .prov a{color:var(--evidence)}
+
+  .callout{background:var(--evidence-soft);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+  .callout .label{margin-bottom:.5rem;color:var(--evidence)}
+
+  /* ---------- violation cards ---------- */
+  .viol-list{display:flex;flex-direction:column;gap:1.1rem}
+  .viol{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:1.2rem 1.3rem;box-shadow:var(--shadow)}
+  .viol h3{font-family:var(--font-display);font-size:1.22rem;margin-bottom:.5rem}
+  .viol-what{margin-bottom:.9rem}
+  .viol-cite{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.9rem}
+  .viol-cite .label{width:100%;margin-bottom:.15rem;color:var(--accent)}
+  .tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.02em;color:var(--evidence);background:var(--evidence-soft);border:1px solid var(--rule);padding:.22rem .5rem;border-radius:5px}
+  .viol-law{background:var(--surface-2);border-radius:8px;padding:.85rem .95rem;margin:0;font-size:.95rem;color:var(--ink-soft)}
+  .viol-law .label{display:block;margin-bottom:.3rem;color:var(--evidence)}
+  .viol-law strong{color:var(--ink)}
+
+  /* ---------- figures / image slots ---------- */
+  figure.shot{margin:1.8rem 0}
+  figure.shot img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule)}
+  .shot-ph{border:1px dashed var(--rule);border-radius:10px;background:var(--surface-2);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.5rem;padding:1.2rem;color:var(--ink-faint)}
+  .shot-ph[hidden]{display:none}
+  .shot-ph .shot-tag{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;color:var(--evidence)}
+  .shot-ph p{margin:0;max-width:34ch;font-size:.92rem}
+  figure.shot figcaption{font-size:.82rem;color:var(--ink-faint);margin-top:.6rem;font-style:italic}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--rule);padding-block:2.6rem 3.4rem;color:var(--ink-soft)}
+  footer h2{font-size:1.15rem;margin-bottom:.8rem}
+  .prov{font-size:.9rem;max-width:60ch}
+  .prov code{font-family:var(--font-mono);font-size:.85em;background:var(--surface-2);padding:.05em .35em;border-radius:4px}
+  .stamp{margin-top:1.6rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint)}
+
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
+
+  @media (max-width:560px){
+    .tl::before{left:5.2rem}
+    .tl li{grid-template-columns:5.2rem 1fr;gap:1rem}
+    .sec-head{gap:.7rem}
+  }
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<div class="loader" aria-hidden="true"><svg class="mark" viewBox="0 0 132 66" aria-hidden="true">
-<rect class="bar" x="0" y="0" width="132" height="4"/><line class="hair" x1="0" y1="7.5" x2="132" y2="7.5"/>
-<rect class="tile" x="47" y="14" width="38" height="38"/><rect class="key" x="50" y="17" width="32" height="32"/>
-<text class="letter" x="66" y="44" text-anchor="middle">R</text>
-<line class="hair" x1="0" y1="58.5" x2="132" y2="58.5"/><rect class="bar" x="0" y="62" width="132" height="4"/>
-</svg><div class="loader__word">THE RECORD</div></div>
-<div class="wipe" aria-hidden="true"></div>
-<header class="site-header"><div class="wrap">
-  <a class="logo " href="index.html" aria-label="The Record, home"><svg class="mark" viewBox="0 0 132 66" aria-hidden="true">
-<rect class="bar" x="0" y="0" width="132" height="4"/><line class="hair" x1="0" y1="7.5" x2="132" y2="7.5"/>
-<rect class="tile" x="47" y="14" width="38" height="38"/><rect class="key" x="50" y="17" width="32" height="32"/>
-<text class="letter" x="66" y="44" text-anchor="middle">R</text>
-<line class="hair" x1="0" y1="58.5" x2="132" y2="58.5"/><rect class="bar" x="0" y="62" width="132" height="4"/>
-</svg><span class="word"><b>THE RECORD</b><i>GCM NO. 2</i></span></a>
-  <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span></button>
-  <nav class="nav" id="site-nav" aria-label="Main"><a href="happened.html">What happened</a><a href="evidence.html">The evidence</a><a href="medicine.html">The medicine</a><a href="law.html">The law set aside</a><a href="appeal.html">The appeal</a><a href="status.html">Where it stands</a></nav>
-</div></header>
-<main id="main">
-<section class="hero">
-  <div class="hero__media duo"><img src="images/06-tribunal.jpg" alt="" width="1600" height="900"></div>
-  <div class="wrap">
-    <p class="eyebrow eyebrow--light">General Court-Martial No. 2</p>
-    <h1><span class="line"><span>Convicted without</span></span><span class="line"><span><em>direct evidence.</em></span></span></h1>
-    <p class="hero__lead" data-hero-fade>A documented account of the court-martial of Cadet Axl Rey L. Sanopao, assembled entirely from the record.</p>
-    <div class="hero__actions" data-hero-fade><a class="btn" href="happened.html" data-magnetic>Start reading <svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a class="btn btn--ghost" href="status.html">Where it stands</a></div>
-    <div class="hero__foot"><span>People of the Philippines v. Cdt 1CL Axl Rey L. Sanopao</span><span class="scroll-cue"><i></i>Scroll</span></div>
+
+<div class="topbar">
+  <div class="wrap row">
+    <span class="mark">GCM No. 2 &nbsp;·&nbsp; <b>The Record</b></span>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Switch light or dark theme"><span id="themeLabel">Dark</span></button>
   </div>
-</section>
-<div class="marquee" aria-hidden="true"><div class="marquee__track"><span>No direct evidence</span><span>No eyewitness to any order</span><span>Dismissed for lack of probable cause</span><span>Conspiracy not alleged</span><span>Fatal injury after the discharge</span><span>Appeal filed 11 June 2026</span><span>Seven years in detention</span><span>No direct evidence</span><span>No eyewitness to any order</span><span>Dismissed for lack of probable cause</span><span>Conspiracy not alleged</span><span>Fatal injury after the discharge</span><span>Appeal filed 11 June 2026</span><span>Seven years in detention</span></div></div>
+</div>
 
-<section class="section"><div class="wrap intro-grid">
-  <div><p class="eyebrow" data-reveal>The court's own words</p>
-  <p class="statement statement--quote" data-words>"It is very clear from the amount of evidence presented by the prosecution that <em>no direct evidence, testimonial or otherwise,</em> linked CDT 1CL SANOPAO to the physical assault that ultimately led to the eventual death of the late CDT 4CL DORMITORIO."</p>
-  <p class="src"><a href="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing" target="_blank" rel="noopener">GCM No. 2 Joint Decision, 31 March 2025, p. 75</a></p></div>
-  <div class="intro-copy" data-reveal>
-    <p>On 31 March 2025, a general court-martial found Cadet Sanopao guilty of instigating the maltreatment that led to the death of a fourth-class cadet, Darwin D. Dormitorio. In the same decision, the court admitted more than once that <strong>no direct evidence and no eyewitness</strong> ever placed such an order in his mouth.</p>
-    <p>Every fact on these pages is drawn from the court's own decision, the sworn transcripts, the charge sheet, or the civilian prosecutor's resolutions. Nothing here is added; the citations are shown so any reader can check them.</p>
-  </div></div></section>
+<header class="masthead wrap">
+  <p class="caption-strip">
+    REPUBLIC OF THE PHILIPPINES<br>
+    ARMED FORCES OF THE PHILIPPINES · GENERAL COURT-MARTIAL No. 2<br>
+    People of the Philippines &nbsp;versus&nbsp; Cdt 1CL Axl Rey L. Sanopao
+  </p>
+  <h1>Convicted without <span class="q">direct evidence.</span></h1>
+  <p class="lede">A documented account of the court-martial of Cadet Axl Rey L. Sanopao, assembled entirely from the record.</p>
+  <p class="thesis measure">On 31 March 2025, a general court-martial found Cadet Sanopao guilty of instigating the maltreatment that led to the death of a fourth-class cadet, Darwin D. Dormitorio. In the same decision, the court admitted more than once that <strong>no direct evidence and no eyewitness</strong> ever placed such an order in his mouth. Every fact on this page is drawn from the court's own decision, the sworn transcripts, the charge sheet, or the civilian prosecutor's resolutions. Nothing here is added; the citations are shown so any reader can check them.</p>
 
-<section class="section on-dark stats-band"><div class="wrap">
-  <div class="stats">
-    <div class="stat" data-reveal><span class="stat__k">The charge</span><span class="stat__v">AW 97</span><span class="stat__n">Conduct prejudicial to good order and military discipline</span></div>
-    <div class="stat" data-reveal><span class="stat__k">Civilian prosecutor</span><span class="stat__v">Dismissed</span><span class="stat__n">No probable cause, Baguio City, 5 June 2020</span></div>
-    <div class="stat" data-reveal><span class="stat__k">Eyewitnesses to an order</span><span class="stat__v">None</span><span class="stat__n">Joint Decision, p. 72</span></div>
-    <div class="stat" data-reveal><span class="stat__k">Sentence</span><span class="stat__v">20 years<small>maximum</small></span><span class="stat__n">Reclusion Temporal, 14 years 8 months 1 day to 20 years, National Penitentiary</span></div>
-    <div class="stat" data-reveal><span class="stat__k">In detention since</span><span class="stat__v">2019</span><span class="stat__n">18 September 2019, more than seven years</span></div>
-  </div></div></section>
+  <p class="archive-link"><a href="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing" target="_blank" rel="noopener">Open the complete case records &nearr;</a></p>
 
-<section class="section"><div class="wrap">
-  <div class="section-head"><p class="eyebrow" data-reveal>Read in order</p><h2 data-reveal>Six chapters, <em>one record.</em></h2>
-  <p data-reveal>Each page takes one part of the case and shows the source beside every claim. Tap any citation to open the full records.</p></div>
-  <div class="chapters"><a class="chapter" href="happened.html" data-reveal><span class="chapter__num">01</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h5v9l6 3c2 1 3 2 3 4v1H4V3h2"/><path d="M4 16h16"/></svg></span><span class="chapter__body"><b>What happened</b><span>One call about missing combat boots, a day in the station hospital, and a death in the early morning.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="chapter" href="evidence.html" data-reveal><span class="chapter__num">02</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17c0-4 1-7 4-9M13 17c0-4 1-7 4-9"/><path d="M5 17h4v-4H5zM13 17h4v-4h-4z"/></svg></span><span class="chapter__body"><b>The evidence</b><span>The court's own admissions, and the witnesses who never heard an order.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="chapter" href="medicine.html" data-reveal><span class="chapter__num">03</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 3 10 2-5h7"/></svg></span><span class="chapter__body"><b>The medicine</b><span>Seven hours of observation, no fresh injury, and a fatal injury placed after the discharge.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="chapter" href="law.html" data-reveal><span class="chapter__num">04</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-2.5 6h5zM20 7l-2.5 6h5z"/></svg></span><span class="chapter__body"><b>The law set aside</b><span>Eleven departures from the Constitution, the Manual for Courts-Martial and the Articles of War.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="chapter" href="appeal.html" data-reveal><span class="chapter__num">05</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 15h7"/></svg></span><span class="chapter__body"><b>The appeal</b><span>The twelve grounds filed with the Chief of Staff on 11 June 2026, explained one by one, with a glossary of cadet terms.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="chapter" href="status.html" data-reveal><span class="chapter__num">06</span>
-  <span class="chapter__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="chapter__body"><b>Where it stands</b><span>The sentence, the appeal, and the two safeguards that remain.</span></span>
-  <span class="chapter__go"><svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a></div></div></section>
+  <div class="facts">
+    <div class="fact"><div class="k">The charge</div><div class="v">AW 97</div></div>
+    <div class="fact crit"><div class="k">Civilian charges</div><div class="v">Dismissed</div></div>
+    <div class="fact crit"><div class="k">Court's finding</div><div class="v">No direct<br>evidence</div></div>
+    <div class="fact"><div class="k">Sentence imposed</div><div class="v">14y 8m 1d<br>– 20y</div></div>
+    <div class="fact"><div class="k">Detained since</div><div class="v">18 Sep 2019</div></div>
+  </div>
+</header>
 
-<section class="band"><div class="wrap">
-  <blockquote data-reveal>He does not ask anyone to forget Cadet Dormitorio.</blockquote>
-  <div data-reveal><p>He asks only that the record be read as it is written, and that a man not be punished as a killer for a death the evidence places in other hands, at another hour.</p>
-  <a class="link-more" href="status.html">Where the case stands <svg class="arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div></div></section>
+<main class="wrap">
+
+  <!-- 1. THE CHARGE -->
+  <section>
+    <div class="sec-head"><span class="sec-no">01</span><h2>What he was actually charged with</h2></div>
+    <div class="measure">
+      <p>The Amended Charge Sheet accused Cadet Sanopao of a single act under <strong>Article of War 97</strong> (Conduct Prejudicial to Good Order and Military Discipline): that on 17 September 2019 he did <em>"instigate/order the physical maltreatment"</em> committed by Cadet Shalimar Imperial Jr. and Cadet Felix Lumbag Jr. against Cadet Darwin Dormitorio, <em>"resulting to and contributing to the death of the latter."</em></p>
+      <p>He was <strong>not</strong> charged with murder, homicide, or torture. He was not accused of laying a hand on anyone. The entire case rested on one theory: that he gave an order. And at pre-trial, the prosecution formally stipulated on the record that it <strong>would not prove conspiracy</strong>. In law, that means only his own act could be charged to him, not the acts of the others or the death itself.</p>
+      <p class="src-line">Source: Amended Charge Sheet; Pre-Trial Conference, TSN 5 February 2021, p. 7; Pre-Trial Order, 5 March 2021.</p>
+    </div>
+  </section>
+
+  <!-- 2. TIMELINE -->
+  <section>
+    <div class="sec-head"><span class="sec-no">02</span><h2>What the record shows happened</h2></div>
+    <p class="sec-intro measure">The act attributed to Cadet Sanopao was in the morning: a call about missing combat boots. The hospital then examined Dormitorio for hours and found no fresh injury. The medical witnesses placed the massive, fatal injury later, after the discharge.</p>
+
+    <figure class="shot">
+      <img src="images/03-boots.jpg" alt="A pair of combat boots on an empty barracks floor" onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+      <div class="shot-ph" hidden><span class="shot-tag">image · 03-boots.jpg</span><p>A single worn pair of combat boots on the floor of an empty barracks, morning light</p></div>
+      <figcaption>The entire case against Cadet Sanopao begins with missing combat boots.</figcaption>
+    </figure>
+
+    <ul class="tl">
+      <li class="key"><time>17 Sep<br>~0652H</time><div class="node"><h3>The combat boots</h3><p>Cadet Sanopao called Cadet Dormitorio about combat boots he had entrusted to him. When the boots could not be found, he told Dormitorio to have his two assigned "buddies," Cadet Imperial and Cadet Lumbag, help look for them. This is the sole act the prosecution calls an "order."</p></div></li>
+      <li><time>17 Sep<br>~0930H</time><div class="node"><h3>Brought to the PMA Station Hospital</h3><p>Dormitorio was admitted and observed for roughly seven hours by the attending physician, Capt. Flor Apple Apostol, and the duty nurse, 2Lt. Cathrynne Ruzzelle Caterial-Bulatao. He was assessed for a urinary tract infection; his whole body was seen.</p></div></li>
+      <li class="key"><time>17 Sep<br>~1600–1700H</time><div class="node"><h3>Discharged and cleared</h3><p>He was discharged with normal vital signs and no fresh injury, only an old, healing bruise from an earlier consultation. He was cleared to return to barracks. Cadet Sanopao had no further contact with him.</p></div></li>
+      <li><time>17 Sep<br>evening</time><div class="node"><h3>Further assaults by others</h3><p>After discharge, the record describes Dormitorio being assaulted again by other cadets through the evening, and his condition worsening overnight.</p></div></li>
+      <li class="key"><time>18 Sep<br>~0100–0515H</time><div class="node"><h3>Death</h3><p>Dormitorio collapsed and died in the early morning hours and was pronounced dead on arrival at the hospital. The cause of death was blunt abdominal trauma with massive internal bleeding.</p></div></li>
+    </ul>
+  </section>
+
+  <!-- 3. NO DIRECT EVIDENCE -->
+  <section>
+    <div class="sec-head"><span class="sec-no">03</span><h2>The court admitted there was no direct evidence</h2></div>
+    <p class="sec-intro measure">The conviction is remarkable for what the tribunal conceded in its own decision. In its written findings, the court acknowledged, more than once, that nothing directly tied Cadet Sanopao to any order to harm.</p>
+    <div class="finding"><blockquote>"There were no eyewitnesses … that he indeed gave orders or instructions to his co-accused to physically maltreat Cadet Dormitorio."</blockquote><span class="src">GCM No. 2 Joint Decision, p. 72</span></div>
+    <div class="finding"><blockquote>"It is very clear from the amount of evidence presented by the prosecution that no direct evidence, testimonial or otherwise, linked Cadet Sanopao to the physical assault that ultimately led to the eventual death of the late Cadet Dormitorio."</blockquote><span class="src">GCM No. 2 Joint Decision, p. 75</span></div>
+  </section>
+
+  <!-- 4. NO WITNESS HEARD AN ORDER -->
+  <section>
+    <div class="sec-head"><span class="sec-no">04</span><h2>No witness heard an order</h2></div>
+    <p class="sec-intro measure">No witness heard any order to maltreat. The academy's investigator found no one who had; Dormitorio's roommates did not hear what was said; and the two co-accused denied receiving such an order. The exchanges below are quoted from the transcripts.</p>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Capt. Jose Carlos Gamos, the academy's first investigator</span><span class="ex-tag">TSN · 19 Mar 2021 · p. 8</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">In the process of your investigation did anyone of the persons you talk to give you information [that] indeed CDT SANOPAO give a direct order for the buddies to commit acts of maltreatment of CDT DORMITORIO Sir?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">No Your Honor.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">So you're certain about it that there was no direct on [sic] express order coming from CDT SANOPAO for cadets IMPERIAL and LUMBAG to maltreat DORMITORIO, correct?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes Your Honor.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Cadet Jason Sierra, Dormitorio's roommate</span><span class="ex-tag">TSN · 26 Nov 2021 · p. 62</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">When CDT DORMITORIO was called to the room of CDT SANOPAO, did you hear what CDT SANOPAO told CDT DORMITORIO?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">No, your Honor.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">No, you did not hear. So you did not hear the order of CDT SANOPAO on CDT DORMITORIO. Correct?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, your Honor.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Cadet Ivan Jeff Dela Cruz, Dormitorio's roommate</span><span class="ex-tag">TSN · 4 Mar 2022 · p. 45</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">You also did not hear anything else from CDT SANOPAO, correct? Apart from him calling out the name of CDT DORMITORIO, correct?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Ang naririnig ko lang na sinasabi ni DORMITORIO maam, nagmu-murmur siya na, "saan na ba yun?" That phrase maam. <span style="color:var(--ink-faint)">(All I heard was Dormitorio murmuring, "where is it?")</span></p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Cadet Shalimar Imperial Jr., co-accused</span><span class="ex-tag">TSN · 12 May 2023 · pp. 28–29</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">Did he tell you to order Cadet Dormitorio to do some exercises?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">No, Your Honor.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">So it's just your initiative?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, Your Honor. As a buddy, we tend to correct some mistakes, Your Honor …</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Cadet Felix Lumbag Jr., co-accused</span><span class="ex-tag">TSN · 12 May 2023 · pp. 49–50</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">May involvement ba sya sa pagkamatay ni DORMITORIO o wala? <span style="color:var(--ink-faint)">(Did he have any involvement in Dormitorio's death, or none?)</span></p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">None Your Honor.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">Paano mo masasabi na wala syang involvement? State a fact kong bakit wala syang involvement. <span style="color:var(--ink-faint)">(How can you say he had no involvement? State a fact.)</span></p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes Your Honor. CDT SANOPAO did not order us to cause the death of 4CL DORMITORIO Your Honor.</p></div>
+      </div>
+    </div>
+
+    <div class="callout measure">
+      <div class="label">And the prosecution conceded it at summation</div>
+      <p style="margin:0">The Trial Judge Advocate admitted: <em>"there is no categorical statement from the witnesses that they heard or saw CDT SANOPAO instruct both CDT LUMBAG and IMPERIAL to do anything to CDT DORMITORIO Your Honors, but based on the statement also of the witnesses they were able to infer …"</em> The case against him, in the prosecutor's own words, was an inference.</p>
+      <p class="src-line" style="margin-top:.7rem">Oral Summation, TSN 18 August 2023, pp. 7, 12.</p>
+    </div>
+  </section>
+
+  <!-- 5. THE INSTRUCTION WAS ABOUT BOOTS -->
+  <section>
+    <div class="sec-head"><span class="sec-no">05</span><h2>The only instruction proven was to find the boots</h2></div>
+    <div class="measure"><p>Cadet Sanopao's roommates were in the room. One, Cadet Buenafred Salvador Jr., heard the instructions and swore that they were about the boots and that there was no order to harm anyone. The other, Cadet Mikael Burong, who says he may have been dozing after morning mess (¶7), swore that he never heard Cadet Sanopao endorse Dormitorio for maltreatment. Their affidavits were offered, then shut out by the court.</p></div>
+    <div class="finding"><blockquote>"I know for sure that Sanopao <strong>DID NOT ORDER</strong> the buddies to maltreat or cause any physical harm to Dormitorio."</blockquote><span class="src">Affidavit of Cadet Buenafred Salvador Jr., 7 November 2019, ¶10 (tendered as excluded evidence)</span></div>
+    <div class="finding"><blockquote>"I never heard Sanopao endorse the concerned cadet for maltreatment."</blockquote><span class="src">Affidavit of Cadet Mikael Burong, 7 November 2019, ¶8 (tendered as excluded evidence)</span></div>
+    <div class="measure"><p>When the defense offered Salvador to prove what the order actually said, the prosecution called it irrelevant and stipulated instead:</p></div>
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Law Member &amp; Trial Judge Advocate</span><span class="ex-tag">TSN · 26 May 2023 · p. 101</span></div>
+      <div class="ex-body">
+        <p class="dline"><span class="who ev">Trial Judge Advocate.</span> "For the prosecution your Honors, this would be irrelevant. We are willing to stipulate that an order was given by CDT SANOPAO."</p>
+        <p class="dline"><span class="who ax">Law Member.</span> "As long as it pertains to the finding of the combat boots?"</p>
+        <p class="dline"><span class="who ev">Trial Judge Advocate.</span> "Yes, your Honors."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MEDICAL -->
+  <section>
+    <div class="sec-head"><span class="sec-no">06</span><h2>The medicine places the fatal injury after he was gone</h2></div>
+    <p class="sec-intro measure">The hospital observed Dormitorio for hours that day and found no fresh injury. The defense pathologist testified that the fatal injuries could not have been present then, and the court's own NBI witness, asked by a panel member, placed the massive injury after the discharge.</p>
+
+    <figure class="shot">
+      <img src="images/04-hospital.jpg" alt="A quiet, empty station-hospital ward" onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+      <div class="shot-ph" hidden><span class="shot-tag">image · 04-hospital.jpg</span><p>A quiet, empty military station-hospital ward, a single made bed, light through blinds</p></div>
+      <figcaption>He was observed for roughly seven hours, then discharged with no fresh injury.</figcaption>
+    </figure>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Capt. Flor Apple Apostol, attending physician</span><span class="ex-tag">TSN · 15 Jul 2021 · pp. 19–20</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">You are very sure, doctor, that there was no indication of hematoma or contusions … from the admission in the morning up until 1700H of September 17, 2019?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">During the morning of September 17, what we noticed is the old contusion hematoma … previously seen during September 6, 2019.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">You're very sure about that, doctor?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, Your Honor.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">2Lt. Cathrynne Caterial-Bulatao, duty nurse</span><span class="ex-tag">TSN · 26 May 2023 · pp. 7, 16</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">Would you confirm that you did not see marks of possible injury on Dormitorio?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">If you're talking about fresh injury, <em>wala po akong nakita</em> (I saw none). But the next dawn, when we checked the body, it was very different. I saw a lot of markings, purplish in color.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Dr. Vladimir Villaseñor, defense forensic pathologist</span><span class="ex-tag">TSN · 15 Jun 2023 · pp. 13, 27</span></div>
+      <div class="ex-body">
+        <div class="qa"><span class="sp">Q.</span><p class="tx">In other words, Doctor Villasenor, as a doctor, with all the findings of the autopsy of Doctor Bandonill, conclusively, the injuries examined and found out of Doctor Bandonill were not present during the time that the patient Dormitorio was being observed and monitored on September 17 at 9:30 AM up to his discharge at 4:30 PM?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Seven (7) hours, Sir, in the hospital, if there are no signs of a shock there are no injuries or let's say there are no vital organs injured, or even blood vessels that were lacerated at that time that the patient was observed from 9AM to 4PM, Sir.</p></div>
+        <div class="qa"><span class="sp">Q.</span><p class="tx">Now, Sir, when it comes to severe pain, as you have said a patient like this would not be able to walk or non-ambulatory, is that correct?</p></div>
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, Sir, with that injuries.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit">
+      <div class="ex-head"><span class="ex-who">Dr. Ronald Bandonill, NBI medico-legal, the court's own witness, asked by Col. Gulapa</span><span class="ex-tag">TSN · 2 Jun 2023 · p. 17</span></div>
+      <div class="ex-body">
+        <div class="qa ans"><span class="sp">A.</span><p class="tx">Taking into consideration also our findings Sir sa autopsy po and taking into consideration also that some of the blood that were found in the abdomen was fresh at the same time yung rapture or breakage po ng mga internal organs were still fresh I would say from the time that he was discharge from the hospital according to history until he was brought to the hospital again the next day this would have been the times that the massive injury would have been inflected [sic] Sir.</p></div>
+      </div>
+    </div>
+    <p class="src-line measure">Earlier in the same testimony, under the Law Member's questions, Dr. Bandonill allowed that some injuries could date from the morning of 17 September (pp. 8–9). Asked by the panel to account for the massive injuries, he placed them after the discharge (p. 17).</p>
+  </section>
+
+  <!-- 7. CIVILIAN DISMISSAL -->
+  <section>
+    <div class="sec-head"><span class="sec-no">07</span><h2>A civilian prosecutor dismissed the same facts</h2></div>
+    <div class="measure"><p>The Office of the City Prosecutor of Baguio City reviewed the very same witnesses and documents. Applying <strong>probable cause</strong> (the lowest threshold in our law), it dismissed all charges against Cadet Sanopao for lack of probable cause on <strong>5 June 2020</strong>, and affirmed that dismissal when the complainant sought reconsideration.</p></div>
+    <div class="finding"><blockquote>"Justice for a fallen cadet does not mean an indictment that is free-for-all. The law may be harsh, but it is the law."</blockquote><span class="src">Joint Review Resolution, Office of the City Prosecutor of Baguio City, dated 24 September 2020 (stamped 28 September 2020), p. 4</span></div>
+    <div class="measure"><p>When a special panel of prosecutors later acted on an order of the Regional Trial Court, it amended the murder Information to name only Cadet Imperial and Cadet Lumbag. Cadet Sanopao was named in <strong>no</strong> Information, in any court.</p><p class="src-line">Supplemental Resolution, Special Panel of Prosecutors (per RTC Branch V, Baguio City), 12 October 2020.</p></div>
+  </section>
+
+  <!-- 8. THE CONVICTION -->
+  <section>
+    <div class="sec-head"><span class="sec-no">08</span><h2>Convicted anyway, and sentenced as a killer</h2></div>
+    <figure class="shot">
+      <img src="images/06-tribunal.jpg" alt="An empty military courtroom" onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+      <div class="shot-ph" hidden><span class="shot-tag">image · 06-tribunal.jpg</span><p>An empty military courtroom, rows of wooden chairs, a national flag, stark and silent</p></div>
+    </figure>
+    <div class="measure">
+      <p>Despite its own admissions, the court found Cadet Sanopao guilty of Article of War 97 (that he "instigated or ordered" the maltreatment) and declared the conduct <em>"tantamount to homicide by acts of torture."</em> It imposed <strong>Reclusion Temporal, 14 years 8 months 1 day to 20 years</strong>, plus dismissal from the service: the same homicide-grade penalty imposed on his two co-accused.</p>
+      <p>He was sentenced as if for homicide aggravated by torture, though the charge sheet alleged neither, and though the court itself held that torture had never been pleaded against him.</p>
+      <p class="src-line">GCM No. 2 Joint Decision, pp. 90–93.</p>
+    </div>
+  </section>
+
+  <!-- 9. THE INJUSTICE -->
+  <section>
+    <div class="sec-head"><span class="sec-no">09</span><h2>The injustice: the law the court set aside</h2></div>
+    <p class="sec-intro measure">A conviction is not only a question of evidence; it is a question of law. On this record the court departed from the Constitution, the Manual for Courts-Martial, the Articles of War, and settled Supreme Court doctrine at nearly every turn. Each departure below is stated with what happened, the specific authority it violated, and what that law actually requires.</p>
+
+    <div class="viol-list">
+
+      <article class="viol">
+        <h3>1 · Punished for a crime that was never charged</h3>
+        <p class="viol-what">The charge was only Article of War 97: instigating maltreatment. Yet the dispositive branded the conduct "homicide by acts of torture" and used those unpleaded acts of "torture" to push the penalty to its maximum, even after the court itself held that torture had never been alleged against him.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">1987 Constitution, Art. III, Sec. 14(1)–(2)</span><span class="tag">R.A. 9745, Sec. 22</span><span class="tag">People v. Natimdim, G.R. 201867 (2020)</span></div>
+        <p class="viol-law"><span class="label">The law</span>An accused has the constitutional <strong>right to be informed of the nature and cause of the accusation</strong> against him. Any fact that raises the penalty must itself be alleged in the charge. A person cannot be sentenced for an offense (or an aggravating circumstance) that was never charged and that he was never given the chance to meet.</p>
+      </article>
+
+      <article class="viol">
+        <h3>2 · A military court imposed a civilian penalty it had no power to impose</h3>
+        <p class="viol-what">The court recharacterized the offense as homicide under Article 249 of the Revised Penal Code and imposed <em>Reclusion Temporal</em>, a civilian penalty. That merged a military disciplinary charge with civilian penal statutes.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">R.A. 7055, Sec. 1</span><span class="tag">MCM, Secs. 7, 11, 12</span><span class="tag">Gonzales v. Abaya, G.R. 164007 (2006)</span><span class="tag">Navales v. Abaya, G.R. 162318 (2004)</span></div>
+        <p class="viol-law"><span class="label">The law</span>Under <strong>R.A. 7055</strong>, when a member of the AFP commits an act penalized under the Revised Penal Code, jurisdiction belongs to the <strong>civil courts</strong>, not a court-martial. A court-martial's power reaches only offenses under the Articles of War. As <em>Gonzales v. Abaya</em> holds, a service member may be tried under the Articles of War only independently of, and separately from, any charge for the same act penalized under the Revised Penal Code.</p>
+      </article>
+
+      <article class="viol">
+        <h3>3 · The acts of others were blamed on him, though conspiracy was abandoned</h3>
+        <p class="viol-what">Having stipulated it would not prove conspiracy, the prosecution could charge Cadet Sanopao only with his own act. Yet the death and the blows struck by others were laid at his door, and he drew the same penalty as the cadets who inflicted them.</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Prosecution stipulation at pre-trial</span><span class="ex-tag">TSN · 5 Feb 2021 · p. 7</span></div>
+          <div class="ex-body">
+            <p class="dline">On 5 February 2021 the prosecution confirmed on the record its earlier admission, made at the pre-trial of 6 March 2020, that it did <em>"not intend to prove the existence of conspiracy among CDTs Sanopao, Lumbag and Imperial."</em> The concession was carried into the Pre-Trial Order dated 5 March 2021. In law, that means only Cadet Sanopao's own act may be charged to him, never the acts of the others or the death itself.</p>
+          </div>
+        </div>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">Revised Penal Code, Arts. 8 &amp; 17(2)</span><span class="tag">People v. Yanson-Dumancas, G.R. 133527-28 (1999)</span><span class="tag">People v. Hirang, 803 Phil. 277 (2017)</span></div>
+        <p class="viol-law"><span class="label">The law</span>Without conspiracy, the maxim "the act of one is the act of all" does not apply: <strong>each accused answers only for his own act</strong>. To convict a "principal by inducement," the inducement must be the <strong>determining cause</strong> of the crime, so direct and powerful as to amount to a command. Asking a plebe to find missing boots is not such an inducement, and Cadet Imperial testified that the exercises were his own initiative.</p>
+      </article>
+
+      <article class="viol">
+        <h3>4 · Convicted on an opinion the court had already excluded, from a witness who was never an expert</h3>
+        <p class="viol-what">The only thing linking Cadet Sanopao to an "order" was the pre-trial investigating officer's personal opinion that telling a plebe to find his boots was "encouraging maltreatment," an opinion he grounded expressly in his own memories as a former cadet. But Lt. Col. Kalang-ad was <strong>never qualified as an expert</strong>. At the offer of his testimony the defense objected that he "has no personal knowledge of the events." When the Law Member offered to treat him as an expert or resource person, Cadet Sanopao's counsel elected on the record to treat him <strong>only as an ordinary witness</strong>, and the Law Member then barred any further questions about his personal experience as a cadet.</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Defense counsel &amp; Law Member: qualifying the witness</span><span class="ex-tag">TSN · 30 Jun 2021 · pp. 24–25</span></div>
+          <div class="ex-body">
+            <p class="dline"><span class="who ev">Atty. Santiago (defense).</span> "We will not treat him as an expert witness per se … we will make it on record that we are only treating Lt. Col. Kalang-ad as an ordinary witness, Your Honor."</p>
+            <p class="dline"><span class="who ax">Law Member.</span> "In that case, from now on, the Court will not allow questions which will deal as to the personal experience of the witness in the academy when he was a cadet."</p>
+          </div>
+        </div>
+        <p class="viol-what" style="margin-top:1.1rem">His cadet-experience opinion was therefore objected to and <strong>shut out at trial</strong>. Yet the convicting decision relied on that very opinion (that an "endorsement" meant an intent to maltreat) as the basis of the conviction, describing counsel as having been "amenable" to treating him as a "reliable resource person" (Joint Decision, p. 75).</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">MCM, Sec. 78 (proof beyond reasonable doubt)</span><span class="tag">Rules of Court, Rule 130 (opinion evidence)</span><span class="tag">The court's own exclusion ruling, TSN 30 Jun 2021, pp. 24–25</span></div>
+        <p class="viol-law"><span class="label">The law</span>Only a <strong>qualified expert</strong> may give opinion testimony; an ordinary witness's opinion is <strong>not competent proof of another person's intent</strong>. Once the court itself ruled Lt. Col. Kalang-ad an ordinary witness and shut out his experience-based opinions, that evidence was gone, and <strong>evidence a court has excluded cannot be revived to convict</strong>. Guilt must rest on legal and competent evidence beyond reasonable doubt.</p>
+      </article>
+
+      <article class="viol">
+        <h3>5 · The exculpatory eyewitnesses were shut out</h3>
+        <p class="viol-what">The affidavits of Cadet Salvador and Cadet Burong, the two roommates who actually heard the instruction, were declared "irrelevant" and excluded, after the prosecution dismissed the very <em>tenor</em> of the only alleged order as irrelevant.</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Law Member &amp; Trial Judge Advocate, on the defense's percipient witnesses</span><span class="ex-tag">TSN · 26 May 2023 · p. 101</span></div>
+          <div class="ex-body">
+            <p class="dline"><span class="who ax">Law Member.</span> "So can you not stipulate if the tenor is just whether it's, 'you find my combat boots,' or 'please find my combat boots'?"</p>
+            <p class="dline"><span class="who ev">Trial Judge Advocate.</span> "For the prosecution your Honors, this would be irrelevant. We are willing to stipulate that an order was given by CDT SANOPAO."</p>
+            <p class="dline"><span class="who ax">Law Member.</span> "As long as it pertains to the finding of the combat boots?"</p>
+            <p class="dline"><span class="who ev">Trial Judge Advocate.</span> "Yes, your Honors."</p>
+          </div>
+        </div>
+        <p class="viol-what" style="margin-top:1.1rem">On that footing the two eyewitnesses were excused. Their affidavits were formally tendered as excluded evidence at the promulgation hearing on 23 June 2023, for the express purpose of proving the true tenor of the order and ruling out any claim that Cadet Sanopao ordered maltreatment.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">1987 Constitution, Art. III, Sec. 14</span><span class="tag">MCM, Sec. 49(F) &amp; (G)</span><span class="tag">ICCPR, Art. 14(3)(e)</span></div>
+        <p class="viol-law"><span class="label">The law</span>Due process guarantees the accused a genuine <strong>opportunity to present his defense and his witnesses</strong>; the Manual entitles both sides to present and support their contentions. Excluding the only witnesses to the actual words of the alleged order removed the defense from the decisive issue in the case.</p>
+      </article>
+
+      <article class="viol">
+        <h3>6 · The court filled the gap with "judicial notice" of its own cadet experience</h3>
+        <p class="viol-what">Confronted with its own admission of "no direct evidence," the panel did not acquit. In its written decision, at page 78, it declared that it <em>"applied the judicial notice rule in appreciating the testimony of Lt. Col. Kalang-ad, as more than the majority of its members are themselves graduates of the Philippine Military Academy and had undergone the same ordeal."</em> It thus supplied the decisive inference, that an "endorsement" meant an intent to maltreat, from the judges' own memories of being hazed.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">Joint Decision, p. 78</span><span class="tag">MCM, Sec. 125</span><span class="tag">Rules of Court, Rule 129, Sec. 2</span><span class="tag">State Prosecutors v. Judge Muro, A.M. RTJ-92-876 (1994)</span></div>
+        <p class="viol-law"><span class="label">The law</span><strong>Judicial notice</strong> lets a court accept, without proof, only facts that are indisputable and commonly known: geography, the calendar, official acts. Section 125 lists exactly what a court-martial may notice; internal cadet customs and a defendant's intent are not on it. A disputed fact at the heart of the case can never be "noticed," and <strong>a judge may not decide on facts he knows only personally</strong>. That is precisely what the panel did.</p>
+      </article>
+
+      <article class="viol">
+        <h3>7 · The court called its own medico-legal witnesses without the defense</h3>
+        <p class="viol-what">On 19 May 2023 the panel called the PNP medico-legal officer, Police Maj. Nolan Genova, as "a witness for the court," and on 2 June 2023 it did the same with the NBI's Dr. Ronald Bandonill. These were not minor or character witnesses. They were the court's <strong>own witnesses, testifying to the two decisive facts of the whole case</strong>: the cause of Cadet Dormitorio's death and when the fatal injury was inflicted. Cadet Sanopao's counsel of choice, Atty. Ma. Concepcion Santiago, was not present when Police Maj. Genova testified; he was excused (p. 26) before the private counsel appeared after lunch (p. 62). At Dr. Bandonill's hearing the military defense counsel spoke only to say there were no further questions (TSN 2 Jun 2023, pp. 25-26). Neither witness was cross-examined by the defense at all.</p>
+        <div class="callout">
+          <div class="label">Who asked the questions</div>
+          <p style="margin:0">To Police Maj. Genova and to Dr. Bandonill, <strong>nearly every question came from the panel</strong>, and the <strong>defense asked none</strong>. The panel did not preside over an examination. It conducted one.</p>
+        </div>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">MCM, Secs. 45, 49 &amp; 75 (Sec. 75-C: the defense conducts cross of court witnesses)</span><span class="tag">1987 Constitution, Art. III, Sec. 14(2)</span><span class="tag">Tabuena v. Sandiganbayan, G.R. 103501-03 (1997)</span><span class="tag">People v. Opida, G.R. L-46272 (1986)</span><span class="tag">ICCPR, Art. 14(3)(e)</span></div>
+        <p class="viol-law"><span class="label">The law</span>A witness for the court is still a witness who must be <strong>confronted</strong>. Section 75-C guarantees, without qualification, that defense counsel conducts the cross-examination of witnesses for the court, and the accused keeps his right to <strong>counsel of his choice</strong>. This matters most, not least, when the witness is testifying to the <strong>facts that decide the case</strong>, the cause and timing of death. When the judges ask nearly every question and the defense asks none, the tribunal has "descended into the arena" and lost "the cold neutrality of an impartial judge" (<em>Tabuena</em>; <em>Opida</em>).</p>
+      </article>
+
+      <article class="viol">
+        <h3>8 · The presiding officer sat in judgment of his own institution</h3>
+        <p class="viol-what">Brig. Gen. Paulo C. Teodoro sat as a member of the court during the trial, and he presided over the court that promulgated the decision (other officers presided during the trial). Throughout, he was also the Assistant Superintendent of the Philippine Military Academy, the very institution whose culture and practices the panel set out to judge.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">MCM, Sec. 58(e)</span><span class="tag">Dacera v. Judge Dizon, A.M. RTJ-00-1573</span></div>
+        <p class="viol-law"><span class="label">The law</span>A judge must have <strong>no personal or institutional interest</strong> in the outcome; litigants are entitled to "the cold neutrality of an impartial judge." Presiding over a case whose evidentiary foundation is one's own institution is a disqualifying conflict. The appearance of impartiality is destroyed even where actual bias is not proved.</p>
+      </article>
+
+      <article class="viol">
+        <h3>9 · Pre-trial rights were denied after an order for a "mabilisang imbestigasyon"</h3>
+        <p class="viol-what">The academy's first investigator, Capt. Gamos, testified that because the death had become a <em>"national issue,"</em> the Commandant, then Brig. Gen. Bartolome Bacarro, ordered them to conduct a <em>"mabilisang imbestigasyon"</em> (a quick investigation). On the stand, the officers who handled the case admitted what that speed cost.</p>
+        <p class="src-line">TSN · 5 Feb 2021 · p. 13 (Capt. Gamos)</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Lt. Col. Manuel Kalang-ad, pre-trial investigating officer</span><span class="ex-tag">TSN · 5 Feb 2021 · pp. 47–48</span></div>
+          <div class="ex-body">
+            <div class="qa"><span class="sp">Q.</span><p class="tx">Did you allow each of the accused to cross-examine available witnesses?</p></div>
+            <div class="qa ans"><span class="sp">A.</span><p class="tx">None.</p></div>
+            <div class="qa"><span class="sp">Q.</span><p class="tx">Did you allow them to present witnesses on their behalf to explain their side?</p></div>
+            <div class="qa ans"><span class="sp">A.</span><p class="tx">No, Your Honor.</p></div>
+          </div>
+        </div>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Maj. Jeffrey Batistiana, company tactical officer</span><span class="ex-tag">TSN · 19 Nov 2021 · pp. 50–51</span></div>
+          <div class="ex-body">
+            <div class="qa"><span class="sp">Q.</span><p class="tx">You also did not furnish them a copy of the delinquency report, correct? And you did not give the 24-hour period for them to explain?</p></div>
+            <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, Your Honor.</p></div>
+            <div class="qa"><span class="sp">Q.</span><p class="tx">And they were never informed of your recommendation, correct?</p></div>
+            <div class="qa ans"><span class="sp">A.</span><p class="tx">Yes, Your Honor.</p></div>
+          </div>
+        </div>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">Article of War 71</span><span class="tag">MCM, Secs. 30(c) &amp; 35(a)</span><span class="tag">Cudia v. Superintendent, PMA, G.R. 211362 (2015)</span></div>
+        <p class="viol-law"><span class="label">The law</span>Before a charge may be referred for trial, <strong>Article of War 71</strong> requires a thorough and impartial investigation in which the accused is given full opportunity to <strong>cross-examine witnesses and present a defense</strong>. As the Supreme Court held in <em>Cudia</em>, "the PMA is not immune from the strictures of due process."</p>
+      </article>
+
+      <article class="viol">
+        <h3>10 · The burden of proof was turned upside down</h3>
+        <p class="viol-what">At the same session of GCM No. 2 on 12 May 2023, in the separate case of another cadet charged over the same incident, a member of the court that day, Col. Resurreccion, pressed that cadet to prove his own innocence:</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Panel member (Col. Resurreccion), to another accused cadet</span><span class="ex-tag">TSN · 12 May 2023 · p. 92</span></div>
+          <div class="ex-body">
+            <p class="dline"><span class="who ax">Panel member.</span> "Papaano mo kami macoconvince without reasonable doubt na hindi ikaw yung naka last touch sa ulo ni Dormitorio?" <span style="color:var(--ink-faint)">(How will you convince us, beyond reasonable doubt, that you were not the last to touch Dormitorio's head?)</span></p>
+          </div>
+        </div>
+        <p class="viol-what" style="margin-top:1.1rem">The demand was addressed to another cadet, not to Cadet Sanopao. But it came from a member of the same court, at the same session, and it laid bare the standard that court was applying: prove your innocence, rather than let the prosecution prove guilt.</p>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">1987 Constitution, Art. III, Sec. 14(2)</span><span class="tag">MCM, Sec. 78</span><span class="tag">People v. Jaen, G.R. 241946 (2019)</span><span class="tag">ICCPR, Art. 14(2)</span></div>
+        <p class="viol-law"><span class="label">The law</span>Every accused is <strong>presumed innocent</strong>, and the burden of proving guilt beyond reasonable doubt rests on the prosecution alone. It never shifts. To demand that the accused prove his own innocence inverts the most basic guarantee of criminal justice. Where the evidence allows an innocent reading, the accused must be acquitted.</p>
+      </article>
+
+      <article class="viol">
+        <h3>11 · The panel coached the prosecutor against a defense witness</h3>
+        <p class="viol-what">On 15 September 2023, while Lt. Col. Ramon Gualberto, a defense witness for co-accused Cadet Imperial, was testifying about the loopholes in the investigation, a panel member turned to the Trial Judge Advocate, the prosecutor, and prompted the objection against the defense's witness:</p>
+        <div class="exhibit">
+          <div class="ex-head"><span class="ex-who">Panel member &amp; Trial Judge Advocate</span><span class="ex-tag">TSN · 15 Sep 2023 · pp. 4, 29</span></div>
+          <div class="ex-body">
+            <p class="dline"><span class="who ax">Panel member.</span> "Ah TJA, anong tawag dun? Pagka hindi nag-sign ng sworn affidavit?" <span style="color:var(--ink-faint)">(What do you call that? When one does not sign a sworn affidavit?)</span></p>
+            <p class="dline"><span class="who ev">Trial Judge Advocate.</span> "As mentioned earlier sir, hearsay din siya sir." <span style="color:var(--ink-faint)">(It's hearsay too, sir.)</span></p>
+          </div>
+        </div>
+        <div class="viol-cite"><span class="label">Violated</span><span class="tag">Dacera v. Judge Dizon, A.M. RTJ-00-1573</span><span class="tag">People v. Opida, G.R. L-46272 (1986)</span></div>
+        <p class="viol-law"><span class="label">The law</span>The Trial Judge Advocate is the <strong>prosecutor</strong>; the panel is the <strong>judge</strong>. A tribunal that prompts the prosecution's objections against a defense witness has stopped being a neutral adjudicator, and the judges may not do the prosecutor's work for him. Litigants are entitled to "the cold neutrality of an impartial judge."</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 10. WHERE IT STANDS -->
+  <section>
+    <div class="sec-head"><span class="sec-no">10</span><h2>Where the case stands</h2></div>
+    <figure class="shot">
+      <img src="images/08-dawn.jpg" alt="Hands holding a folder of legal documents at sunrise" onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+      <div class="shot-ph" hidden><span class="shot-tag">image · 08-dawn.jpg</span><p>Hands holding a folder of legal documents, sunrise over a distant horizon</p></div>
+    </figure>
+    <div class="measure">
+      <p>Cadet Sanopao has been in continuous detention since <strong>18 September 2019</strong>, the day Dormitorio died: more than seven years. His pay and allowances have been withheld since June 2025.</p>
+      <ul class="tl" style="margin:1.6rem 0">
+        <li><time>1 Jun 2026</time><div class="node"><h3>Review ordered</h3><p>The Chief of Staff, AFP directed the Judge Advocate General and J1 to comprehensively review the cases of personnel held at the AFP Custodial Detention Center.</p><p class="src-line" style="margin-top:.3rem">CSAFP Memo 243-01 Jun26</p></div></li>
+        <li class="key"><time>11 Jun 2026</time><div class="node"><h3>Appeal filed</h3><p>Cadet Sanopao filed his appeal to the Chief of Staff, AFP under Presidential Decree No. 1199, with 333 pages of annexes. As of the date of this page, it has not been decided.</p></div></li>
+      </ul>
+      <p>Two safeguards remain. The decision itself provides that the penalty <em>"shall begin to be executed upon approval by the Chief of Staff, Armed Forces of the Philippines as Convening Authority"</em> (Joint Decision, p. 93). And because he is a cadet, any sentence extending to his dismissal requires <strong>confirmation by the President</strong> before it is carried into execution (Article of War 47(c)).</p>
+      <p>He does not ask anyone to forget Cadet Dormitorio. He asks only that the record be read as it is written, and that a man not be punished as a killer for a death the evidence places in other hands, at another hour.</p>
+    </div>
+  </section>
+
 </main>
-<footer class="site-footer"><div class="wrap">
-  <div class="footer-cta"><h2 data-reveal>Read the record <em>for yourself.</em></h2>
-    <a class="btn" href="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing" target="_blank" rel="noopener" data-magnetic data-reveal>Open the case records <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10L10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
-  <div class="footer-cols">
-    <div><a class="logo logo--light" href="index.html" aria-label="The Record, home"><svg class="mark" viewBox="0 0 132 66" aria-hidden="true">
-<rect class="bar" x="0" y="0" width="132" height="4"/><line class="hair" x1="0" y1="7.5" x2="132" y2="7.5"/>
-<rect class="tile" x="47" y="14" width="38" height="38"/><rect class="key" x="50" y="17" width="32" height="32"/>
-<text class="letter" x="66" y="44" text-anchor="middle">R</text>
-<line class="hair" x1="0" y1="58.5" x2="132" y2="58.5"/><rect class="bar" x="0" y="62" width="132" height="4"/>
-</svg><span class="word"><b>THE RECORD</b><i>GCM NO. 2</i></span></a><p class="muted">Every quotation on this site is drawn from the court-martial's Joint Decision, the sworn transcripts, the charge sheet, or the Baguio City Prosecutor's resolutions. Citations are shown so any reader can check them. All persons named appear in the official record.</p></div>
-    <div><h3>Read in order</h3><ul><li><a href="index.html">Home</a></li><li><a href="happened.html">What happened</a></li><li><a href="evidence.html">The evidence</a></li><li><a href="medicine.html">The medicine</a></li><li><a href="law.html">The law set aside</a></li><li><a href="appeal.html">The appeal</a></li><li><a href="status.html">Where it stands</a></li></ul></div>
-    <div><h3>The records</h3><ul><li><a href="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing" target="_blank" rel="noopener">Joint Decision, transcripts and resolutions (Google Drive)</a></li><li>Last updated 28 October 2026</li></ul></div>
-  </div>
-  <div class="legal"><span>Prepared from the record · General Court-Martial No. 2</span><span>People of the Philippines v. Cdt Axl Rey L. Sanopao</span></div>
-</div></footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="js/site.js" defer></script>
+
+<footer class="wrap">
+  <h2>About this record</h2>
+  <p class="prov">Every quotation and figure on this page is drawn from primary documents in the case: the GCM No. 2 Joint Decision (promulgated 31 March 2025), the sworn Transcripts of Stenographic Notes cited beside each excerpt, the Amended Charge Sheet, and the resolutions of the Office of the City Prosecutor of Baguio City. Source citations appear in <code>monospace</code> throughout so any reader may check them against the record. All persons named appear in the official record of the case. Testimony is quoted verbatim or, where marked, rendered into plain English without changing its substance.</p>
+  <p class="prov" style="margin-top:1rem">The complete records are available in full, including the Joint Decision, the transcripts, the charge sheet, and the Baguio City Prosecutor's resolutions: <a href="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing" target="_blank" rel="noopener">open the full case records on Google Drive</a>. You may also click any citation on this page to open the same archive.</p>
+  <p class="stamp">Prepared from the record · General Court-Martial No. 2 · Last updated 28 October 2026</p>
+</footer>
+
+<script>
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('themeBtn'), lbl=document.getElementById('themeLabel');
+    function current(){ return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'); }
+    function apply(t){ root.setAttribute('data-theme',t); lbl.textContent = t==='dark' ? 'Light' : 'Dark'; }
+    apply(current());
+    btn.addEventListener('click',function(){ apply(current()==='dark'?'light':'dark'); });
+
+    if(!matchMedia('(prefers-reduced-motion:reduce)').matches && 'IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+      },{rootMargin:'0px 0px -5% 0px',threshold:0});
+      document.querySelectorAll('section, .finding, .exhibit, figure.shot, .viol').forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+    }
+
+    // Make every source citation open the full records archive
+    var DRIVE="https://drive.google.com/drive/folders/1R9CuoGEpRNkxWwNfFk2G1XBFtbAvMJvR?usp=sharing";
+    function openRecords(){ window.open(DRIVE,"_blank","noopener"); }
+    document.querySelectorAll(".ex-tag,.src,.src-line").forEach(function(el){
+      el.classList.add("srclink"); el.setAttribute("role","link"); el.setAttribute("tabindex","0"); el.title="Open the full case records";
+      el.addEventListener("click",openRecords);
+      el.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openRecords(); } });
+    });
+  })();
+</script>
 </body>
 </html>
